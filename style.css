@@ -1,0 +1,77 @@
+/*style.css */
+#logo
+{
+	width: 200px;
+	padding-right: 50px;
+	padding-left: 50px;
+}
+
+body
+{
+	font-family: 'Roboto', sans-serif;
+	margin: 0;
+}
+
+h1:not([class*="card"])
+{
+	font-family: 'Roboto', sans-serif;
+	color: #59C3C3;
+	border: 1px solid green ;
+	border-radius: 15px ;
+	box-sizing: border-box;
+	margin-left: 100px;
+	margin-right: 100px;
+	padding: 16px 16px;
+	text-align: center;
+	box-shadow: 1px 1px 5px #C8C8C8;
+}
+
+h2:not([class*="card"])
+{
+	font-family: 'Roboto', sans-serif;
+	border: 1px solid green ;
+	border-radius: 10px ;
+	box-sizing: border-box;
+	margin-left: 100px;
+	margin-right: 100px;
+	padding: 16px 16px;
+	text-align: center;
+	background: #BDD9BF;
+	color: #52489C;
+}
+
+h3, #form
+{
+	font-family: 'Roboto', sans-serif;
+	border: 1px solid green ;
+	border-radius: 10px ;
+	box-sizing: border-box;
+	margin-left: 100px;
+	margin-right: 100px;
+	padding: 16px 16px;
+	text-align: center;
+	background: #4B9DAA ;
+	color: #52489C;
+}
+
+#form > input
+{
+	max-width: 400px;
+	margin : auto;
+}
+
+hr
+{
+	font-family: 'Roboto', sans-serif;
+}
+
+.card
+{
+	width: 300px;
+	display: inline-block;
+	border : 1px solid black;
+	border-radius: 5px;
+}
+
+/*<i class="fas fa-bookmark"></i>
+//<i class="far fa-trash-alt"></i>3
