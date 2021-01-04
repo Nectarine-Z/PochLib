@@ -43,6 +43,7 @@ $(document).ready(function()
 function getBookCards(_title, _id, _author, _description, _imgLink)
 {
 	card = $('<div></div>').addClass('card');
+	card.append($('<i></i>').addClass('fa fa-bookmark'));
 	card.append($('<h1></h1>').addClass('cardTitle').text("Titre : " + _title));
 	card.append($('<h2></<h2>').addClass('cardId').text("ID : " + _id));
 	card.append($('<h2></<h2>').addClass('cardAuthor').text("Auteur : " + _author));
