@@ -2,7 +2,6 @@
 
 $(document).ready(function()
 {
-	console.log('hi');
 	$(".h3").click(function()
 	{
 		const formulaire = `<div id="form">
@@ -22,17 +21,19 @@ $(document).ready(function()
 				return;
 			}
 
-			console.log(titleRequest)
-			console.log(authorRequest)
 			$.getJSON("https://www.googleapis.com/books/v1/volumes?q=intitle:" + titleRequest + "+inauthor:" + authorRequest, function(result)
 			{
-				console.log(result.items.length)
+				$('#resultContainer').empty();
+				if(result.totalItems == 0)
+				{
+					alert ("Aucun livre n'a été trouvé !");
+					return;
+				}
 				result.items.forEach(function(item)
 				{
-					console.log(item);
 					description = typeof item.volumeInfo.description !== 'undefined' ? item.volumeInfo.description.substring(0,201) : "Information manquante";
-					lienImage = typeof item.volumeInfo.imageLinks !== 'undefined' ? (item.volumeInfo.imageLinks.smallThumbnail !== 'undefined' ? item.volumeInfo.imageLinks.smallThumbnail : "./unavailable.png") : "./unavailable.png";
-					$('#myBooks').append(getBookCards(item.volumeInfo.title, item.id, item.volumeInfo.authors[0], description, lienImage));
+					lienImage = typeof item.volumeInfo.imageLinks !== 'undefined' ? (typeof item.volumeInfo.imageLinks.smallThumbnail !== 'undefined' ? item.volumeInfo.imageLinks.smallThumbnail : "./unavailable.png") : "./unavailable.png";
+					$('#resultContainer').append(getBookCards(item.volumeInfo.title, item.id, item.volumeInfo.authors[0], description, lienImage));
 				});
 			});
 		});

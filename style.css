@@ -12,7 +12,7 @@ body
 	margin: 0;
 }
 
-h1:not([class*="card"])
+#myBooks > h1
 {
 	font-family: 'Roboto', sans-serif;
 	color: #59C3C3;
@@ -26,7 +26,7 @@ h1:not([class*="card"])
 	box-shadow: 1px 1px 5px #C8C8C8;
 }
 
-h2:not([class*="card"])
+#myBooks > h2
 {
 	font-family: 'Roboto', sans-serif;
 	border: 1px solid green ;
