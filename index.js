@@ -1,3 +1,15 @@
+var booksArray = [];
+var maxHeight = 0;
+
+const formulaire = `<div id="form"> 
+					<h4>Titre du livre</h4>
+					<input type="text" name="titre du livre" id= "livre"  placeholder="Saisir le titre du livre" required="saisie obligatoire">
+					<h4>Auteur</h4>
+					<input type="text" name="nom de l'auteur" id= "auteur"	placeholder="Saisir le nom de l'auteur.e" required="saisie obligatoire">
+					<button id="go">Rechercher</button>
+					<button id="cancel">Annuler</button>
+					</div>`
+
 function afficherNouveauFavori(id)
 {
 	$.getJSON("https://www.googleapis.com/books/v1/volumes/" + id, function(result)
@@ -8,7 +20,6 @@ function afficherNouveauFavori(id)
 	});
 }
 
-var booksArray = [];
 $(document).ready(function()
 {
 	var stringifiedArray = sessionStorage.getItem("books");
@@ -21,22 +32,22 @@ $(document).ready(function()
 		});
 	}
 
-	$(".h3").click(function()
+	$("#containerBoutonAjout").click(function()
 	{
-		const formulaire = `<div id="form">
-					<input type="text" name="titre du livre" id= "livre"  placeholder="Saisir le titre du livre" required="saisie obligatoire">
-					<input type="text" name="nom de l'auteur" id= "auteur"	placeholder="Saisir le nom de l'auteur.e" required="saisie obligatoire">
-					<input type="button" name="Rechercher" id="go" value="Rechercher">
-					<input type="button" name="Annuler" id="cancel" value="Annuler">
-					</div>`
-		$(".h3").after(formulaire)
-
-		$("#cancel" ).click(function() {
+		$("#containerBoutonAjout").after(formulaire);
+		$("#containerBoutonAjout").empty();
+		
+		$("#cancel").click(function()
+		{
 			$("#form").remove();
 			$('#resultContainer').empty();
-		  });
+			$("#resultLabel").text("");
+			$("#containerBoutonAjout").append($("<button>Ajouter un livre</button>").attr("id", "boutonAjout"));
 
-		$("#go").click(function(){
+		});
+
+		$("#go").click(function()
+		{
 			const titleRequest = $("#livre").val();
 			const authorRequest = $("#auteur").val();
 
@@ -48,7 +59,9 @@ $(document).ready(function()
 
 			$.getJSON("https://www.googleapis.com/books/v1/volumes?q=intitle:" + titleRequest + "+inauthor:" + authorRequest, function(result)
 			{
+				
 				$('#resultContainer').empty();
+				$("#resultLabel").text("Résultat de recherche");
 				
 				if(result.totalItems == 0)
 				{
@@ -69,19 +82,20 @@ $(document).ready(function()
 
 function getBookCards(_title, _id, _author, _description, _imgLink, type = 1)
 {
-	const icon = $('<i></i>');
+	const icon = $('<i></i>').addClass('icon');
 	if(type == 0)
 	{
-		icon.addClass('fa fa-trash');
+		icon.addClass('fa fa-trash fa-2x');
 		icon.click(function()
 		{
 			booksArray.pop(_id)
 			$('#' + _id + "Fav").remove();
+			sessionStorage.setItem("books", JSON.stringify(booksArray));
 		});
 	}
-	else if(type == 1)
+				else if(type == 1)
 	{
-		icon.addClass('fa fa-bookmark');
+		icon.addClass('fa fa-bookmark fa-2x');
 		icon.click(function()
 		{
 			if(!booksArray.includes(_id))
@@ -91,7 +105,7 @@ function getBookCards(_title, _id, _author, _description, _imgLink, type = 1)
 				afficherNouveauFavori(_id);
 			}
 			else
-				alert("Vous ne pouvez pas ajouter deux fois le même livre!")
+				alert("Vous ne pouvez pas ajouter deux fois le même livre !")
 		})
 	}
 

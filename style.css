@@ -1,15 +1,34 @@
 /*style.css */
+
 #logo
 {
-	width: 200px;
-	padding-right: 50px;
-	padding-left: 50px;
+	width: 15rem;
+	margin: auto;
+	display: block;
+
 }
 
 body
 {
 	font-family: 'Roboto', sans-serif;
 	margin: 0;
+	
+}
+
+
+#boutonAjout
+{
+	font-family: 'Roboto', sans-serif;
+	font-size: 3vw;
+	font-weight: bolder;
+	border: #2A7768;
+	background-color: #469387;
+	color:white;
+	margin: auto;
+	display: block;
+	border-radius: 5px;
+	text-align: center;
+	width: 25%;
 }
 
 #myBooks > h1
@@ -19,8 +38,7 @@ body
 	border: 1px solid green ;
 	border-radius: 15px ;
 	box-sizing: border-box;
-	margin-left: 100px;
-	margin-right: 100px;
+	margin: 0;
 	padding: 16px 16px;
 	text-align: center;
 	box-shadow: 1px 1px 5px #C8C8C8;
@@ -29,50 +47,110 @@ body
 #myBooks > h2
 {
 	font-family: 'Roboto', sans-serif;
-	border: 1px solid green ;
-	border-radius: 10px ;
-	box-sizing: border-box;
-	margin-left: 100px;
-	margin-right: 100px;
-	padding: 16px 16px;
 	text-align: center;
-	background: #BDD9BF;
-	color: #52489C;
+	font-weight: bolder;
 }
 
-h3, #form
+h1, h2
 {
-	font-family: 'Roboto', sans-serif;
-	border: 1px solid green ;
-	border-radius: 10px ;
-	box-sizing: border-box;
-	margin-left: 100px;
-	margin-right: 100px;
-	padding: 16px 16px;
-	text-align: center;
-	background: #4B9DAA ;
-	color: #52489C;
+	font-size: 3vw;
+}
+
+input, p, h3
+{
+	font-size: 2vw;
+}
+
+#form
+{
+	padding-left: 5%;
+	padding-right: 5%;
 }
 
 #form > input
 {
-	max-width: 400px;
-	margin : auto;
+	width: 100%;
 }
 
-hr
+#form > button
 {
-	font-family: 'Roboto', sans-serif;
+	width: 33%;
+	display: block;
+	color: white;
+	border: 0;
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+	margin-top: 1rem;
+	border-radius: 5px;
+}
+
+#go
+{
+	background-color: #469387;
+}
+
+#cancel
+{
+	background-color: tomato;
 }
 
 .card
 {
-	width: 300px;
-	border: 2px solid green ;
-	border-radius: 40px ;
-	display: inline-block;
-	border-radius: 5px;
+	border: 2px solid green;
+	margin: 2rem ;
+	background-color: rgb(246, 248, 247);
 }
 
-/*
-//<i class="far fa-trash-alt"></i>3
+.icon
+{
+	color :green;
+	margin-left: 90%;
+}
+
+
+
+
+#resultLabel
+	{
+	text-align: center;
+	font-size: 2em;
+	font-weight: bolder;
+}
+
+/* Pour rendre Responsive */
+
+#resultContainer, #content
+{
+	display: grid;
+	grid-gap: 2rem;
+}
+
+@media (max-width : 575px)
+{
+	#resultContainer, #content
+	{		
+		grid-template-columns: repeat(1, 1fr);
+	}
+
+	.card
+	{
+		margin-left: 2em;
+		margin-right: 2em;
+	}
+}
+
+@media (min-width : 576px) and (max-width : 767px)
+{
+	#resultContainer, #content
+	{		
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (min-width : 768px)
+{
+	#resultContainer, #content
+	{		
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
