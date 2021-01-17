@@ -10,7 +10,7 @@
 
 ## Contribute to the project
 
-PochLib is an open source project. Feel free to fork the source and contribute with your own features.
+Pull requests are welcome.
 
 ## Authors
 
