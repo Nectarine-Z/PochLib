@@ -1,14 +1,14 @@
 var booksArray = [];
 var maxHeight = 0;
 
-const formulaire = `<div id="form"> 
+const formulaire = `<form id="form"> 
 					<h4>Titre du livre</h4>
 					<input type="text" name="titre du livre" id= "livre"  placeholder="Saisir le titre du livre" required="saisie obligatoire">
 					<h4>Auteur</h4>
 					<input type="text" name="nom de l'auteur" id= "auteur"	placeholder="Saisir le nom de l'auteur.e" required="saisie obligatoire">
 					<button id="go">Rechercher</button>
 					<button id="cancel">Annuler</button>
-					</div>`
+					</form>`
 
 function afficherNouveauFavori(id)
 {
@@ -41,13 +41,14 @@ $(document).ready(function()
 		{
 			$("#form").remove();
 			$('#resultContainer').empty();
-			$("#resultLabel").text("");
+			$('#resultLabel').remove();
 			$("#containerBoutonAjout").append($("<button>Ajouter un livre</button>").attr("id", "boutonAjout"));
 
 		});
 
-		$("#go").click(function()
+		$("#go").click(function(e)
 		{
+			e.preventDefault();
 			const titleRequest = $("#livre").val();
 			const authorRequest = $("#auteur").val();
 
@@ -61,7 +62,7 @@ $(document).ready(function()
 			{
 				
 				$('#resultContainer').empty();
-				$("#resultLabel").text("Résultat de recherche");
+				$('#resultContainer').before('<h3 id="resultLabel"> Résultat de la recherche</h3>');
 				
 				if(result.totalItems == 0)
 				{
@@ -109,7 +110,7 @@ function getBookCards(_title, _id, _author, _description, _imgLink, type = 1)
 		})
 	}
 
-	card = $('<div></div>').addClass('card').attr('id', _id + (type == 0 ? "Fav" : "Res"));
+	card = $('<article></article>').addClass('card').attr('id', _id + (type == 0 ? "Fav" : "Res"));
 	card.append(icon);
 	card.append($('<h1></h1>').addClass('cardTitle').text("Titre : " + _title));
 	card.append($('<h2></<h2>').addClass('cardId').text("ID : " + _id));

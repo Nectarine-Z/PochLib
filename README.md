@@ -6,6 +6,7 @@
 ## Technologies
 - JS
 - CSS 
+- HTML
 
 ## Contribute to the project
 
