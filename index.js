@@ -116,7 +116,7 @@ function getBookCards(_title, _id, _author, _description, _imgLink, type = 1)
 	card.append($('<h2></<h2>').addClass('cardId').text("ID : " + _id));
 	card.append($('<h2></<h2>').addClass('cardAuthor').text("Auteur : " + _author));
 	card.append($('<p></<p>').addClass('cardDescription').text("Description : " + _description));
-	card.append($('<img></<img>').addClass('cardImage').attr({'src' : _imgLink, width : '100%'}).text("Description : " + _description));
+	card.append($('<img></<img>').addClass('cardImage').attr({'src' : _imgLink, width : '50%'}).text("Description : " + _description));
 	return card;
 }
 
