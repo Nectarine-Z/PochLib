@@ -62,6 +62,7 @@ $(document).ready(function()
 			{
 				
 				$('#resultContainer').empty();
+				$('#resultLabel').remove();
 				$('#resultContainer').before('<h3 id="resultLabel"> Résultat de la recherche</h3>');
 				
 				if(result.totalItems == 0)
@@ -109,9 +110,10 @@ function getBookCards(_title, _id, _author, _description, _imgLink, type = 1)
 				alert("Vous ne pouvez pas ajouter deux fois le même livre !")
 		})
 	}
-
+	var temp= $('<div></div>').addClass('iconBox');
+	temp.append(icon);
 	card = $('<article></article>').addClass('card').attr('id', _id + (type == 0 ? "Fav" : "Res"));
-	card.append(icon);
+	card.append(temp);
 	card.append($('<h1></h1>').addClass('cardTitle').text("Titre : " + _title));
 	card.append($('<h2></<h2>').addClass('cardId').text("ID : " + _id));
 	card.append($('<h2></<h2>').addClass('cardAuthor').text("Auteur : " + _author));
