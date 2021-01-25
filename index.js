@@ -10,14 +10,9 @@ const formulaire = `<form id="form">
 					<button id="cancel">Annuler</button>
 					</form>`
 
-function afficherNouveauFavori(id)
+function afficherNouveauFavori(book)
 {
-	$.getJSON("https://www.googleapis.com/books/v1/volumes/" + id, function(result)
-	{
-		description = typeof result.volumeInfo.description !== 'undefined' ? result.volumeInfo.description.substring(0,201) : "Information manquante";
-		lienImage = typeof result.volumeInfo.imageLinks !== 'undefined' ? (typeof result.volumeInfo.imageLinks.smallThumbnail !== 'undefined' ? result.volumeInfo.imageLinks.smallThumbnail : "./unavailable.png") : "./unavailable.png";
-		$('#content').append(getBookCards(result.volumeInfo.title, result.id, result.volumeInfo.authors[0], description, lienImage, 0));
-	});
+	$('#content').append(getBookCards(book.title, book.id, book.author, book.description, book.imgLink, 0));
 }
 
 $(document).ready(function()
@@ -26,9 +21,9 @@ $(document).ready(function()
 	if(stringifiedArray != null)
 	{
 		booksArray = JSON.parse(stringifiedArray);
-		booksArray.forEach(function(id)
+		booksArray.forEach(function(book)
 		{
-			afficherNouveauFavori(id);
+			afficherNouveauFavori(book);
 		});
 	}
 
@@ -90,9 +85,12 @@ function getBookCards(_title, _id, _author, _description, _imgLink, type = 1)
 		icon.addClass('fa fa-trash fa-2x');
 		icon.click(function()
 		{
-			booksArray.pop(_id)
-			$('#' + _id + "Fav").remove();
-			sessionStorage.setItem("books", JSON.stringify(booksArray));
+			const index = booksArray.findIndex(b => b.id === _id)
+			if(index !== -1) {
+				booksArray.splice(index, 1)
+				$('#' + _id + "Fav").remove();
+				sessionStorage.setItem("books", JSON.stringify(booksArray));
+			}
 		});
 	}
 				else if(type == 1)
@@ -100,11 +98,19 @@ function getBookCards(_title, _id, _author, _description, _imgLink, type = 1)
 		icon.addClass('fa fa-bookmark fa-2x');
 		icon.click(function()
 		{
-			if(!booksArray.includes(_id))
+			const index = booksArray.findIndex(b => b.id === _id)
+			if(index === -1)
 			{
-				booksArray.push(_id);			
+				const bookFav = {
+					id: _id,
+					title: _title,
+					author: _author,
+					description: _description,
+					imgLink: _imgLink,
+				}
+				booksArray.push(bookFav);
 				sessionStorage.setItem("books", JSON.stringify(booksArray));
-				afficherNouveauFavori(_id);
+				afficherNouveauFavori(bookFav);
 			}
 			else
 				alert("Vous ne pouvez pas ajouter deux fois le même livre !")
@@ -121,4 +127,5 @@ function getBookCards(_title, _id, _author, _description, _imgLink, type = 1)
 	card.append($('<img></<img>').addClass('cardImage').attr({'src' : _imgLink, width : '50%'}).text("Description : " + _description));
 	return card;
 }
+
 
