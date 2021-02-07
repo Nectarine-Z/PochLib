@@ -15,7 +15,9 @@ body {
   display: block;
   border-radius: 5px;
   text-align: center;
-  width: 25%;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
   padding: 13px 13px;
 }
 
